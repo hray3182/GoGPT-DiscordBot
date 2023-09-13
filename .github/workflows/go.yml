@@ -1,49 +1,31 @@
-name: Go Build and Release
+# .github/workflows/release.yaml
 
 on:
-  push:
-    branches: [ "master" ]
-    tags:
-      - 'v*'
-  pull_request:
-    branches: [ "master" ]
+  release:
+    types: [created]
+
+permissions:
+    contents: write
+    packages: write
 
 jobs:
-  build:
+  releases-matrix:
+    name: Release Go Binary
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        # build and publish in parallel: linux/386, linux/amd64, linux/arm64, windows/386, windows/amd64, darwin/amd64, darwin/arm64
         goos: [linux, windows, darwin]
-        goarch: [amd64]
+        goarch: [amd64, arm64]
+        exclude:
+            goos: darwin
+          - goarch: arm64
+            goos: windows
     steps:
     - uses: actions/checkout@v3
-
-    - name: Set up Go
-      uses: actions/setup-go@v4
+    - uses: wangyoucao577/go-release-action@v1
       with:
-        go-version: '1.20'
-
-    - name: Build the Go app
-      run: |
-        GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o my-app-${{ matrix.goos }}-${{ matrix.goarch }} ./...
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: my-app-${{ matrix.goos }}-${{ matrix.goarch }}
-        path: ./my-app-${{ matrix.goos }}-${{ matrix.goarch }}
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Download artifacts
-      uses: actions/download-artifact@v2
-    - name: Setup GitHub CLI
-      uses: cli/cli@latest
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Create GitHub Release and upload artifacts
-      run: |
-        gh release create ${{ github.ref }} ./* --title "${{ github.ref }}" --notes "Release of ${{ github.ref }}"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        goos: ${{ matrix.goos }}
+        goarch: ${{ matrix.goarch }}
+        project_path: "."
