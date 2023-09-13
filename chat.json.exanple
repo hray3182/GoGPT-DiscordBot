@@ -1,0 +1,12 @@
+{
+    "Commands": [
+        {
+            "command": "chat",
+            "description": "Ask AI a question",
+            "parameter_name": "message",
+            "parameter_description": "The message to send",
+            "openai_model": "gpt-3.5-turbo",
+            "prompt": "Help me translate the following into English: \n"
+        }
+    ]
+}
