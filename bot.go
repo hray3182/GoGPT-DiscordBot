@@ -158,7 +158,7 @@ func (c chatSetting) handler(s *discordgo.Session, i *discordgo.InteractionCreat
 					return
 				}
 
-				fmt.Printf(res.Choices[0].Delta.Content)
+				// fmt.Printf(res.Choices[0].Delta.Content)
 				buffer <- res.Choices[0].Delta.Content
 			}
 		}()
