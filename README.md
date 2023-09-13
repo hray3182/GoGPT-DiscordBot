@@ -51,7 +51,7 @@ For a list of all supported models, refer to:
 ## Notes:
 
 1. This project is a minimalistic implementation for a Discord bot leveraging GPT.
-2. Discord has a message limit of 2000 characters.
+2. Discord has a message limit of 2000 characters, and this app not handle that.
 3. This project doesn't account for Discord API rate limits. Excessive use on large servers might exceed these limits.
 4. Similarly, this project doesn't account for OpenAI API rate limits.
 5. Dependencies include the `go-openai` and `discordgo` packages.
