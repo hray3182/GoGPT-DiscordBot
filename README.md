@@ -37,7 +37,7 @@ The server will concatenate the `prompt` with the `parameter` before sending the
 **Example**:
 ```go
 prompt := "Help me translate the following into English: \n"
-parameter := "How are you today?"
+parameter := "你好?"
 
 // Message sent to GPT:
 //Help me translate the following into English: 
