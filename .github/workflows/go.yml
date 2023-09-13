@@ -41,7 +41,7 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v2
     - name: Setup GitHub CLI
-      uses: cli/cli@v1
+      uses: cli/cli@stable
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
     - name: Create GitHub Release and upload artifacts
