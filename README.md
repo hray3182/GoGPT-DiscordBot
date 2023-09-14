@@ -1,6 +1,6 @@
 # GoGPT-DiscordBot
 
-GoGPT-DiscordBot is a minimal implementation of a Discord bot powered by OpenAI's GPT models.
+GoGPT-DiscordBot is a minimal implementation of a Discord bot powered by OpenAI's GPT models. It offers the flexibility to customize and add your own commands through a simple configuration.
 
 ## How to Use:
 
